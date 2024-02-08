@@ -1,0 +1,17 @@
+{
+  "name": "@designliquido/delegua-arquivos",
+  "version": "0.0.0",
+  "description": "Biblioteca para acessos a arquivos e diretórios em Delégua",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DesignLiquido/delegua-arquivos.git"
+  },
+  "scripts": {
+    "empacotar": "yarn rimraf ./dist && tsc && copyfiles -V ./README.md ./dist && copyfiles -V ./LICENSE ./dist",
+    "publicar-npm": "npm publish --access public"
+  },
+  "author": "Leonel Sanches da Silva",
+  "devDependencies": {
+    "@types/node": "^20.11.17"
+  }
+}
