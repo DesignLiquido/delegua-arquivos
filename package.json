@@ -13,9 +13,11 @@
   "author": "Leonel Sanches da Silva",
   "devDependencies": {
     "@types/jest": "^29.5.12",
+    "@types/mock-fs": "^4.13.4",
     "@types/node": "^20.11.17",
     "copyfiles": "^2.4.1",
     "jest": "^29.7.0",
+    "mock-fs": "^5.5.0",
     "rimraf": "^5.0.5",
     "ts-jest": "^29.1.2",
     "ts-node": "^10.9.2",
