@@ -8,7 +8,8 @@
   },
   "scripts": {
     "empacotar": "yarn rimraf ./dist && tsc && yarn copyfiles -V ./README.md ./dist && yarn copyfiles -V ./LICENSE ./dist",
-    "publicar-npm": "npm publish ./dist --access public"
+    "publicar-npm": "npm publish ./dist --access public",
+    "testes-unitarios": "jest --runInBand --coverage"
   },
   "author": "Leonel Sanches da Silva",
   "devDependencies": {

@@ -20,10 +20,18 @@ export class Arquivo {
     }
 
     escrever(conteudo: string): void {
-        sistemaArquivos.writeFileSync(this.caminhoArquivo, conteudo);
+        sistemaArquivos.appendFileSync(this.caminhoArquivo, conteudo);
     }
 
     paraTexto() {
         return this.buffer.toString();
+    }
+
+    recarregar() {
+        this.buffer = sistemaArquivos.readFileSync(this.caminhoArquivo);
+    }
+
+    sobrescrever(conteudo: string): void {
+        sistemaArquivos.writeFileSync(this.caminhoArquivo, conteudo);
     }
 }

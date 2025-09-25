@@ -1,17 +1,17 @@
 import mock from "mock-fs";
 
-import { diretorioAtual } from "../fontes";
+import { abrir, diretorioAtual, diretorioExiste, eArquivo, eDiretorio } from "../fontes";
 
 describe('Casos de sucesso', () => {
 
     beforeAll(() => {
         mock({
-            'path/to/fake/dir': {
-                'some-file.txt': 'file content here',
-                'empty-dir': {/** empty directory */}
+            'diretorio/de/mentirinha': {
+                'arquivo-texto.txt': 'algum texto aqui',
+                'diretorio-vazio': {/** diretório vazio */}
             },
-            'path/to/some.png': Buffer.from([8, 6, 7, 5, 3, 0, 9]),
-            'some/other/path': {/** another empty directory */}
+            'caminho/para/algum.png': Buffer.from([8, 6, 7, 5, 3, 0, 9]),
+            'algum/outro/caminho': {/** outro diretório vazio */}
         });
     });
 
@@ -21,7 +21,9 @@ describe('Casos de sucesso', () => {
 
     describe('abrir()', () => {
         it('Trivial', () => {
-
+            const arquivo = abrir(undefined, "caminho/para/algum.png");
+            expect(arquivo).toBeDefined();
+            expect(arquivo.buffer).toHaveLength(7);
         });
     });
 
@@ -29,6 +31,42 @@ describe('Casos de sucesso', () => {
         it('Trivial', () => {
             const resultado = diretorioAtual();
             expect(resultado).toBeDefined();
+        });
+    });
+
+    describe('diretorioExiste()', () => {
+        it('Trivial', () => {
+            const resultado = diretorioExiste(undefined, "diretorio/de/mentirinha");
+            expect(resultado).toBeTruthy();
+        });
+
+        it('Falso', () => {
+            const resultado = diretorioExiste(undefined, "diretorio/nao/existente");
+            expect(resultado).toBeFalsy();
+        });
+    });
+
+    describe('eArquivo()', () => {
+        it('Trivial', () => {
+            const resultado = eArquivo(undefined, "diretorio/de/mentirinha/arquivo-texto.txt");
+            expect(resultado).toBeTruthy();
+        });
+
+        it('Diretório', () => {
+            const resultado = eArquivo(undefined, "diretorio/de/mentirinha");
+            expect(resultado).toBeFalsy();
+        });
+    });
+
+    describe('eDiretorio()', () => {
+        it('Trivial', () => {
+            const resultado = eDiretorio(undefined, "diretorio/de/mentirinha/arquivo-texto.txt");
+            expect(resultado).toBeFalsy();
+        });
+
+        it('Diretório', () => {
+            const resultado = eDiretorio(undefined, "diretorio/de/mentirinha");
+            expect(resultado).toBeTruthy();
         });
     });
 });
