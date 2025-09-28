@@ -3,7 +3,7 @@
         "outDir": "dist",
         "module": "commonjs",
         "target": "es2017",
-        "rootDir": "fontes",
+        "rootDir": ".",
         "allowJs": true,
         "sourceMap": true,
         "declaration": true,
@@ -14,6 +14,6 @@
         "dist/**/*",
         "jest.config.ts",
         "node_modules",
-        "testes"
+        "testes/**/*"
     ]
 }
