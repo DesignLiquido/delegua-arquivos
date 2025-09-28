@@ -11,6 +11,7 @@
     },
     "exclude": [
         "babel.config.js", 
+        "coverage",
         "dist/**/*",
         "jest.config.ts",
         "node_modules",

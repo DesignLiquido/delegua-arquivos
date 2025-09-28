@@ -7,11 +7,15 @@
     "url": "git+https://github.com/DesignLiquido/delegua-arquivos.git"
   },
   "scripts": {
-    "empacotar": "yarn rimraf ./dist && tsc && yarn copyfiles -V ./README.md ./dist && yarn copyfiles -V ./LICENSE ./dist",
+    "empacotar": "yarn rimraf ./dist && tsc && yarn copyfiles -V ./README.md ./dist && yarn copyfiles -V ./LICENSE ./dist && yarn copyfiles -V ./package.json ./dist",
     "publicar-npm": "npm publish ./dist --access public",
     "testes-unitarios": "jest --runInBand --coverage"
   },
   "author": "Leonel Sanches da Silva",
+  "license": "MIT",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
   "devDependencies": {
     "@types/jest": "^29.5.12",
     "@types/mock-fs": "^4.13.4",
