@@ -1,16 +1,22 @@
+import * as caminho from 'path';
 import * as sistemaArquivos from 'fs';
 
 import { Arquivo } from './arquivo';
 
 /**
- * 
- * @param _ 
- * @param caminhoArquivo 
- * @returns 
+ * Abre um arquivo, lê o conteúdo dele, e retorna um descritor dele.
+ * @param interpretador A instância do interpretador, que tem por padrão um `diretorioBase` definido.
+ * @param caminhoArquivo O caminho do arquivo.
+ * @returns Um descritor para o arquivo.
  */
-export function abrir(_: any, caminhoArquivo: string): Arquivo {
-    const buffer = sistemaArquivos.readFileSync(caminhoArquivo);
-    return new Arquivo(caminhoArquivo, buffer);
+export function abrir(interpretador: { diretorioBase: string }, caminhoArquivo: string): Arquivo {
+    let caminhoArquivoResolvido = caminhoArquivo;
+    if (caminhoArquivo.startsWith('.')) {
+        caminhoArquivoResolvido = caminho.join(interpretador.diretorioBase, caminhoArquivo);
+    }
+    
+    const buffer = sistemaArquivos.readFileSync(caminhoArquivoResolvido);
+    return new Arquivo(caminhoArquivoResolvido, buffer);
 }
 
 /**

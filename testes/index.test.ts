@@ -20,8 +20,14 @@ describe('Casos de sucesso', () => {
     });
 
     describe('abrir()', () => {
-        it('Trivial', () => {
-            const arquivo = abrir(undefined, "caminho/para/algum.png");
+        it('Caminho absoluto', () => {
+            const arquivo = abrir({ diretorioBase: 'qualquercoisa'}, "caminho/para/algum.png");
+            expect(arquivo).toBeDefined();
+            expect(arquivo.buffer).toHaveLength(7);
+        });
+
+        it('Caminho relativo', () => {
+            const arquivo = abrir({ diretorioBase: 'caminho'}, "./para/algum.png");
             expect(arquivo).toBeDefined();
             expect(arquivo.buffer).toHaveLength(7);
         });
