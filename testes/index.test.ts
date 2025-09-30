@@ -42,36 +42,36 @@ describe('Casos de sucesso', () => {
 
     describe('diretorioExiste()', () => {
         it('Trivial', () => {
-            const resultado = diretorioExiste(undefined, "diretorio/de/mentirinha");
+            const resultado = diretorioExiste({ diretorioBase: 'qualquercoisa'}, "diretorio/de/mentirinha");
             expect(resultado).toBeTruthy();
         });
 
         it('Falso', () => {
-            const resultado = diretorioExiste(undefined, "diretorio/nao/existente");
+            const resultado = diretorioExiste({ diretorioBase: 'qualquercoisa'}, "diretorio/nao/existente");
             expect(resultado).toBeFalsy();
         });
     });
 
     describe('eArquivo()', () => {
         it('Trivial', () => {
-            const resultado = eArquivo(undefined, "diretorio/de/mentirinha/arquivo-texto.txt");
+            const resultado = eArquivo({ diretorioBase: 'qualquercoisa'}, "diretorio/de/mentirinha/arquivo-texto.txt");
             expect(resultado).toBeTruthy();
         });
 
         it('Diretório', () => {
-            const resultado = eArquivo(undefined, "diretorio/de/mentirinha");
+            const resultado = eArquivo({ diretorioBase: 'qualquercoisa'}, "diretorio/de/mentirinha");
             expect(resultado).toBeFalsy();
         });
     });
 
     describe('eDiretorio()', () => {
         it('Trivial', () => {
-            const resultado = eDiretorio(undefined, "diretorio/de/mentirinha/arquivo-texto.txt");
+            const resultado = eDiretorio({ diretorioBase: 'qualquercoisa'}, "diretorio/de/mentirinha/arquivo-texto.txt");
             expect(resultado).toBeFalsy();
         });
 
         it('Diretório', () => {
-            const resultado = eDiretorio(undefined, "diretorio/de/mentirinha");
+            const resultado = eDiretorio({ diretorioBase: 'qualquercoisa'}, "diretorio/de/mentirinha");
             expect(resultado).toBeTruthy();
         });
     });

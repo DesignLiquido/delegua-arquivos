@@ -3,6 +3,15 @@ import * as sistemaArquivos from 'fs';
 
 import { Arquivo } from './arquivo';
 
+function logicaComumResolucaoCaminho(diretorioBaseInterpretador: string, caminhoDiretorioOuArquivo: string) {
+    let caminhoResolvido = caminhoDiretorioOuArquivo;
+    if (caminhoDiretorioOuArquivo.startsWith('.')) {
+        caminhoResolvido = caminho.join(diretorioBaseInterpretador, caminhoDiretorioOuArquivo);
+    }
+
+    return caminhoResolvido;
+}
+
 /**
  * Abre um arquivo, lê o conteúdo dele, e retorna um descritor dele.
  * @param interpretador A instância do interpretador, que tem por padrão um `diretorioBase` definido.
@@ -10,11 +19,7 @@ import { Arquivo } from './arquivo';
  * @returns Um descritor para o arquivo.
  */
 export function abrir(interpretador: { diretorioBase: string }, caminhoArquivo: string): Arquivo {
-    let caminhoArquivoResolvido = caminhoArquivo;
-    if (caminhoArquivo.startsWith('.')) {
-        caminhoArquivoResolvido = caminho.join(interpretador.diretorioBase, caminhoArquivo);
-    }
-    
+    const caminhoArquivoResolvido = logicaComumResolucaoCaminho(interpretador.diretorioBase, caminhoArquivo);    
     const buffer = sistemaArquivos.readFileSync(caminhoArquivoResolvido);
     return new Arquivo(caminhoArquivoResolvido, buffer);
 }
@@ -29,32 +34,35 @@ export function diretorioAtual(): string {
 
 /**
  * 
- * @param _ 
- * @param caminhoDiretorio 
- * @returns 
+ * @param interpretador A instância do interpretador, que tem por padrão um `diretorioBase` definido. 
+ * @param caminhoDiretorio O caminho do diretório
+ * @returns `true` se o diretório existe, e `false` em caso contrário.
  */
-export function diretorioExiste(_: any, caminhoDiretorio: string): boolean {
-    return sistemaArquivos.existsSync(caminhoDiretorio);
+export function diretorioExiste(interpretador: { diretorioBase: string }, caminhoDiretorio: string): boolean {
+    const caminhoDiretorioResolvido = logicaComumResolucaoCaminho(interpretador.diretorioBase, caminhoDiretorio);
+    return sistemaArquivos.existsSync(caminhoDiretorioResolvido);
 }
 
 /**
  * 
- * @param _ 
- * @param caminhoArquivo 
+ * @param interpretador A instância do interpretador, que tem por padrão um `diretorioBase` definido. 
+ * @param caminhoArquivoOuDiretorio O caminho a ser testado.
  * @returns 
  */
-export function eArquivo(_: any, caminhoArquivo: string): boolean {
-    return sistemaArquivos.lstatSync(caminhoArquivo).isFile();
+export function eArquivo(interpretador: { diretorioBase: string }, caminhoArquivoOuDiretorio: string): boolean {
+    const caminhoResolvido = logicaComumResolucaoCaminho(interpretador.diretorioBase, caminhoArquivoOuDiretorio);
+    return sistemaArquivos.lstatSync(caminhoResolvido).isFile();
 }
 
 /**
  * 
- * @param _ 
- * @param caminhoArquivo 
+ * @param interpretador A instância do interpretador, que tem por padrão um `diretorioBase` definido. 
+ * @param caminhoArquivoOuDiretorio O caminho a ser testado.
  * @returns 
  */
-export function eDiretorio(_: any, caminhoArquivo: string): boolean {
-    return sistemaArquivos.lstatSync(caminhoArquivo).isDirectory();
+export function eDiretorio(interpretador: { diretorioBase: string }, caminhoArquivoOuDiretorio: string): boolean {
+    const caminhoResolvido = logicaComumResolucaoCaminho(interpretador.diretorioBase, caminhoArquivoOuDiretorio);
+    return sistemaArquivos.lstatSync(caminhoResolvido).isDirectory();
 }
 
 export * from './arquivo';

@@ -22,7 +22,7 @@ describe('Classe Arquivo', () => {
         let arquivo: Arquivo;
 
         beforeAll(() => {
-            arquivo = abrir(undefined, 'diretorio/de/mentirinha/arquivo-texto.txt');
+            arquivo = abrir({ diretorioBase: 'qualquercoisa'}, 'diretorio/de/mentirinha/arquivo-texto.txt');
         });
 
         it('eArquivo()', () => {
