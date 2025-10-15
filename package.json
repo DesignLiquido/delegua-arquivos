@@ -1,6 +1,6 @@
 {
   "name": "@designliquido/delegua-arquivos",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Biblioteca para acessos a arquivos e diretórios em Delégua",
   "repository": {
     "type": "git",
