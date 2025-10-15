@@ -1,4 +1,4 @@
-import { abrir, diretorioAtual, diretorioExiste, eArquivo, eDiretorio } from "./fontes";
+import { abrir, Arquivo, diretorioAtual, diretorioExiste, eArquivo, eDiretorio } from "./fontes";
 
 const definicaoEArquivo = {
     tipoRetorno: 'lógico',
@@ -23,6 +23,50 @@ const definicaoEDiretorio = {
 }
 
 export const DeleguaModuloArquivos = {
+    // Classes
+    Arquivo: {
+        implementacao: Arquivo,
+        propriedades: {
+            
+        },
+        metodos: {
+            eArquivo: {
+                tipoRetorno: 'lógico',
+                argumentos: []
+            },
+            eDiretorio: {
+                tipoRetorno: 'lógico',
+                argumentos: []
+            },
+            escrever: {
+                tipoRetorno: 'vazio',
+                argumentos: [
+                    {
+                        nome: 'conteudo',
+                        tipo: 'texto'
+                    }
+                ]
+            },
+            paraTexto: {
+                tipoRetorno: 'texto',
+                argumentos: []
+            },
+            recarregar: {
+                tipoRetorno: 'vazio',
+                argumentos: []
+            },
+            sobrescrever: {
+                tipoRetorno: 'vazio',
+                argumentos: [
+                    {
+                        nome: 'conteudo',
+                        tipo: 'texto'
+                    }
+                ]
+            }
+        }
+    },
+    // Métodos
     abrir: {
         tipoRetorno: 'Arquivo',
         funcao: abrir,
