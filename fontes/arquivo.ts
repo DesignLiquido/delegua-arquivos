@@ -43,7 +43,7 @@ export class Arquivo {
      * @returns {string} O conteúdo do arquivo como texto.
      */
     paraTexto(): string {
-        return this.buffer.toString();
+        return this.buffer.toString().replace(/\r\n/g, '\n');
     }
 
     /**
