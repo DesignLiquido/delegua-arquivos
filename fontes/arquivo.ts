@@ -1,4 +1,5 @@
-import * as sistemaArquivos from 'fs';
+import { SistemaArquivosInterface } from './interfaces/sistema-arquivos-interface';
+import { SistemaArquivosNode } from './infraestruturas/sistema-arquivos-node';
 
 /**
  * Representa um arquivo no sistema de arquivos.
@@ -6,12 +7,15 @@ import * as sistemaArquivos from 'fs';
 export class Arquivo {
     caminhoArquivo: string;
     buffer: Buffer;
-    stat: sistemaArquivos.Stats;
 
-    constructor(caminhoArquivo: string, buffer: Buffer) {
+    private sistemaArquivos: SistemaArquivosInterface;
+    private informacoes: { eArquivo: boolean; eDiretorio: boolean };
+
+    constructor(caminhoArquivo: string, buffer: Buffer, sistemaArquivos: SistemaArquivosInterface = new SistemaArquivosNode()) {
         this.caminhoArquivo = caminhoArquivo;
         this.buffer = buffer;
-        this.stat = sistemaArquivos.lstatSync(caminhoArquivo);
+        this.sistemaArquivos = sistemaArquivos;
+        this.informacoes = this.sistemaArquivos.obterInformacoes(caminhoArquivo);
     }
 
     /**
@@ -19,7 +23,7 @@ export class Arquivo {
      * @returns {boolean} Verdadeiro se for um arquivo, falso caso contrário.
      */
     eArquivo(): boolean {
-        return this.stat.isFile();
+        return this.informacoes.eArquivo;
     }
 
     /**
@@ -27,7 +31,7 @@ export class Arquivo {
      * @returns {boolean} Verdadeiro se for um diretório, falso caso contrário.
      */
     eDiretorio(): boolean {
-        return this.stat.isDirectory();
+        return this.informacoes.eDiretorio;
     }
 
     /**
@@ -35,7 +39,7 @@ export class Arquivo {
      * @param {string} conteudo O conteúdo a ser escrito no arquivo.
      */
     escrever(conteudo: string): void {
-        sistemaArquivos.appendFileSync(this.caminhoArquivo, conteudo);
+        this.sistemaArquivos.anexarArquivo(this.caminhoArquivo, conteudo);
     }
 
     /**
@@ -50,7 +54,7 @@ export class Arquivo {
      * Recarrega o conteúdo do arquivo a partir do sistema de arquivos.
      */
     recarregar() {
-        this.buffer = sistemaArquivos.readFileSync(this.caminhoArquivo);
+        this.buffer = this.sistemaArquivos.lerArquivo(this.caminhoArquivo);
     }
 
     /**
@@ -58,6 +62,6 @@ export class Arquivo {
      * @param {string} conteudo O novo conteúdo a ser escrito no arquivo.
      */
     sobrescrever(conteudo: string): void {
-        sistemaArquivos.writeFileSync(this.caminhoArquivo, conteudo);
+        this.sistemaArquivos.escreverArquivo(this.caminhoArquivo, conteudo);
     }
 }
