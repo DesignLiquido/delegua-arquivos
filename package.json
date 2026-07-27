@@ -2,8 +2,8 @@
   "name": "@designliquido/delegua-arquivos",
   "version": "0.1.0",
   "description": "Biblioteca para acessos a arquivos e diretórios em Delégua",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "index.js",
+  "types": "index.d.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/DesignLiquido/delegua-arquivos.git"

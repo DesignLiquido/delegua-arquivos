@@ -1,4 +1,4 @@
-import { abrir, Arquivo, diretorioAtual, diretorioExiste, eArquivo, eDiretorio } from "./fontes";
+import { abrir, Arquivo, diretorioAtual, diretorioExiste, eArquivo, eDiretorio } from ".";
 
 const definicaoEArquivo = {
     tipoRetorno: 'lógico',

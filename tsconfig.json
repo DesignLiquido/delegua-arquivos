@@ -4,7 +4,7 @@
         "module": "commonjs",
         "target": "ES2020",
         "lib": ["ES2020"],
-        "rootDir": ".",
+        "rootDir": "./fontes",
         "sourceMap": true,
         "declaration": true,
         "declarationMap": true,
@@ -14,6 +14,7 @@
         "forceConsistentCasingInFileNames": true,
         "resolveJsonModule": true
     },
+    "include": ["fontes/**/*"],
     "exclude": [
         "dist",
         "node_modules",
