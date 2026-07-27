@@ -21,8 +21,8 @@ describe('Classe Arquivo', () => {
     describe('Propriedades e métodos de Arquivo', () => {
         let arquivo: Arquivo;
 
-        beforeAll(() => {
-            arquivo = abrir({ diretorioBase: 'qualquercoisa'}, 'diretorio/de/mentirinha/arquivo-texto.txt');
+        beforeAll(async () => {
+            arquivo = await abrir({ diretorioBase: 'qualquercoisa'}, 'diretorio/de/mentirinha/arquivo-texto.txt');
         });
 
         it('eArquivo()', () => {
@@ -37,15 +37,15 @@ describe('Classe Arquivo', () => {
             expect(arquivo.paraTexto()).toBe('algum texto aqui');
         });
 
-        it('escrever()', () => {
-            arquivo.escrever(' teste um dois');
-            arquivo.recarregar();
+        it('escrever()', async () => {
+            await arquivo.escrever(' teste um dois');
+            await arquivo.recarregar();
             expect(arquivo.paraTexto()).toBe('algum texto aqui teste um dois');
         });
 
-        it('sobrescrever()', () => {
-            arquivo.sobrescrever('teste um dois');
-            arquivo.recarregar();
+        it('sobrescrever()', async () => {
+            await arquivo.sobrescrever('teste um dois');
+            await arquivo.recarregar();
             expect(arquivo.paraTexto()).toBe('teste um dois');
         });
     });

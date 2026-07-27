@@ -1,30 +1,35 @@
 import * as caminho from 'path';
-import * as sistemaArquivos from 'fs';
+import { promises as sistemaArquivos } from 'fs';
 
 import { SistemaArquivosInterface } from '../interfaces/sistema-arquivos-interface';
 
 /**
- * Implementação padrão de `SistemaArquivosInterface`, baseada nas APIs síncronas do Node.js.
+ * Implementação padrão de `SistemaArquivosInterface`, baseada nas APIs assíncronas do Node.js.
  */
 export class SistemaArquivosNode implements SistemaArquivosInterface {
-    lerArquivo(caminhoArquivo: string): Buffer {
-        return sistemaArquivos.readFileSync(caminhoArquivo);
+    async lerArquivo(caminhoArquivo: string): Promise<Buffer> {
+        return sistemaArquivos.readFile(caminhoArquivo);
     }
 
-    escreverArquivo(caminhoArquivo: string, conteudo: string): void {
-        sistemaArquivos.writeFileSync(caminhoArquivo, conteudo);
+    async escreverArquivo(caminhoArquivo: string, conteudo: string): Promise<void> {
+        await sistemaArquivos.writeFile(caminhoArquivo, conteudo);
     }
 
-    anexarArquivo(caminhoArquivo: string, conteudo: string): void {
-        sistemaArquivos.appendFileSync(caminhoArquivo, conteudo);
+    async anexarArquivo(caminhoArquivo: string, conteudo: string): Promise<void> {
+        await sistemaArquivos.appendFile(caminhoArquivo, conteudo);
     }
 
-    existeArquivo(caminhoAlvo: string): boolean {
-        return sistemaArquivos.existsSync(caminhoAlvo);
+    async existeArquivo(caminhoAlvo: string): Promise<boolean> {
+        try {
+            await sistemaArquivos.access(caminhoAlvo);
+            return true;
+        } catch {
+            return false;
+        }
     }
 
-    obterInformacoes(caminhoAlvo: string): { eArquivo: boolean; eDiretorio: boolean } {
-        const informacoes = sistemaArquivos.lstatSync(caminhoAlvo);
+    async obterInformacoes(caminhoAlvo: string): Promise<{ eArquivo: boolean; eDiretorio: boolean }> {
+        const informacoes = await sistemaArquivos.lstat(caminhoAlvo);
         return {
             eArquivo: informacoes.isFile(),
             eDiretorio: informacoes.isDirectory()

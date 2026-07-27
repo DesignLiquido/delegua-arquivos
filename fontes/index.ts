@@ -10,7 +10,7 @@ const servicoArquivosPadrao = new ServicoArquivos(new SistemaArquivosNode());
  * @param caminhoArquivo O caminho do arquivo.
  * @returns Um descritor para o arquivo.
  */
-export function abrir(interpretador: { diretorioBase: string }, caminhoArquivo: string): Arquivo {
+export async function abrir(interpretador: { diretorioBase: string }, caminhoArquivo: string): Promise<Arquivo> {
     return servicoArquivosPadrao.abrir(interpretador, caminhoArquivo);
 }
 
@@ -28,7 +28,7 @@ export function diretorioAtual(): string {
  * @param caminhoDiretorio O caminho do diretório
  * @returns `true` se o diretório existe, e `false` em caso contrário.
  */
-export function diretorioExiste(interpretador: { diretorioBase: string }, caminhoDiretorio: string): boolean {
+export async function diretorioExiste(interpretador: { diretorioBase: string }, caminhoDiretorio: string): Promise<boolean> {
     return servicoArquivosPadrao.diretorioExiste(interpretador, caminhoDiretorio);
 }
 
@@ -38,7 +38,7 @@ export function diretorioExiste(interpretador: { diretorioBase: string }, caminh
  * @param caminhoArquivoOuDiretorio O caminho a ser testado.
  * @returns
  */
-export function eArquivo(interpretador: { diretorioBase: string }, caminhoArquivoOuDiretorio: string): boolean {
+export async function eArquivo(interpretador: { diretorioBase: string }, caminhoArquivoOuDiretorio: string): Promise<boolean> {
     return servicoArquivosPadrao.eArquivo(interpretador, caminhoArquivoOuDiretorio);
 }
 
@@ -48,7 +48,7 @@ export function eArquivo(interpretador: { diretorioBase: string }, caminhoArquiv
  * @param caminhoArquivoOuDiretorio O caminho a ser testado.
  * @returns
  */
-export function eDiretorio(interpretador: { diretorioBase: string }, caminhoArquivoOuDiretorio: string): boolean {
+export async function eDiretorio(interpretador: { diretorioBase: string }, caminhoArquivoOuDiretorio: string): Promise<boolean> {
     return servicoArquivosPadrao.eDiretorio(interpretador, caminhoArquivoOuDiretorio);
 }
 

@@ -4,11 +4,11 @@
  * possa ser injetada por quem consome este pacote.
  */
 export interface SistemaArquivosInterface {
-    lerArquivo(caminhoArquivo: string): Buffer;
-    escreverArquivo(caminhoArquivo: string, conteudo: string): void;
-    anexarArquivo(caminhoArquivo: string, conteudo: string): void;
-    existeArquivo(caminho: string): boolean;
-    obterInformacoes(caminho: string): { eArquivo: boolean; eDiretorio: boolean };
+    lerArquivo(caminhoArquivo: string): Promise<Buffer>;
+    escreverArquivo(caminhoArquivo: string, conteudo: string): Promise<void>;
+    anexarArquivo(caminhoArquivo: string, conteudo: string): Promise<void>;
+    existeArquivo(caminho: string): Promise<boolean>;
+    obterInformacoes(caminho: string): Promise<{ eArquivo: boolean; eDiretorio: boolean }>;
     diretorioAtual(): string;
     resolverCaminho(diretorioBaseInterpretador: string, caminhoDiretorioOuArquivo: string): string;
 }

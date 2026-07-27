@@ -20,14 +20,14 @@ describe('Casos de sucesso', () => {
     });
 
     describe('abrir()', () => {
-        it('Caminho absoluto', () => {
-            const arquivo = abrir({ diretorioBase: 'qualquercoisa'}, "caminho/para/algum.png");
+        it('Caminho absoluto', async () => {
+            const arquivo = await abrir({ diretorioBase: 'qualquercoisa'}, "caminho/para/algum.png");
             expect(arquivo).toBeDefined();
             expect(arquivo.buffer).toHaveLength(7);
         });
 
-        it('Caminho relativo', () => {
-            const arquivo = abrir({ diretorioBase: 'caminho'}, "./para/algum.png");
+        it('Caminho relativo', async () => {
+            const arquivo = await abrir({ diretorioBase: 'caminho'}, "./para/algum.png");
             expect(arquivo).toBeDefined();
             expect(arquivo.buffer).toHaveLength(7);
         });
@@ -41,37 +41,37 @@ describe('Casos de sucesso', () => {
     });
 
     describe('diretorioExiste()', () => {
-        it('Trivial', () => {
-            const resultado = diretorioExiste({ diretorioBase: 'qualquercoisa'}, "diretorio/de/mentirinha");
+        it('Trivial', async () => {
+            const resultado = await diretorioExiste({ diretorioBase: 'qualquercoisa'}, "diretorio/de/mentirinha");
             expect(resultado).toBeTruthy();
         });
 
-        it('Falso', () => {
-            const resultado = diretorioExiste({ diretorioBase: 'qualquercoisa'}, "diretorio/nao/existente");
+        it('Falso', async () => {
+            const resultado = await diretorioExiste({ diretorioBase: 'qualquercoisa'}, "diretorio/nao/existente");
             expect(resultado).toBeFalsy();
         });
     });
 
     describe('eArquivo()', () => {
-        it('Trivial', () => {
-            const resultado = eArquivo({ diretorioBase: 'qualquercoisa'}, "diretorio/de/mentirinha/arquivo-texto.txt");
+        it('Trivial', async () => {
+            const resultado = await eArquivo({ diretorioBase: 'qualquercoisa'}, "diretorio/de/mentirinha/arquivo-texto.txt");
             expect(resultado).toBeTruthy();
         });
 
-        it('Diretório', () => {
-            const resultado = eArquivo({ diretorioBase: 'qualquercoisa'}, "diretorio/de/mentirinha");
+        it('Diretório', async () => {
+            const resultado = await eArquivo({ diretorioBase: 'qualquercoisa'}, "diretorio/de/mentirinha");
             expect(resultado).toBeFalsy();
         });
     });
 
     describe('eDiretorio()', () => {
-        it('Trivial', () => {
-            const resultado = eDiretorio({ diretorioBase: 'qualquercoisa'}, "diretorio/de/mentirinha/arquivo-texto.txt");
+        it('Trivial', async () => {
+            const resultado = await eDiretorio({ diretorioBase: 'qualquercoisa'}, "diretorio/de/mentirinha/arquivo-texto.txt");
             expect(resultado).toBeFalsy();
         });
 
-        it('Diretório', () => {
-            const resultado = eDiretorio({ diretorioBase: 'qualquercoisa'}, "diretorio/de/mentirinha");
+        it('Diretório', async () => {
+            const resultado = await eDiretorio({ diretorioBase: 'qualquercoisa'}, "diretorio/de/mentirinha");
             expect(resultado).toBeTruthy();
         });
     });
