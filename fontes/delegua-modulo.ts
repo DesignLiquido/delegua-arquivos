@@ -1,4 +1,27 @@
-import { abrir, Arquivo, diretorioAtual, diretorioExiste, eArquivo, eDiretorio } from ".";
+import {
+    abrir,
+    Arquivo,
+    caminhoAbsoluto,
+    criarDiretorio,
+    criarDiretorioTemporario,
+    definirPermissoes,
+    diretorioAtual,
+    diretorioExiste,
+    diretorioPai,
+    diretorioPessoal,
+    eArquivo,
+    eDiretorio,
+    escreverTexto,
+    existe,
+    juntarCaminhos,
+    lerTexto,
+    listarDiretorio,
+    nomeBase,
+    remover,
+    renomear
+} from ".";
+
+const argumento = (nome: string, tipo: string) => ({ nome, tipo });
 
 const definicaoEArquivo = {
     tipoRetorno: 'lógico',
@@ -95,5 +118,43 @@ export const DeleguaModuloArquivos = {
     eArquivo: definicaoEArquivo,
     'éArquivo': definicaoEArquivo,
     eDiretorio: definicaoEDiretorio,
-    'éDiretório': definicaoEDiretorio
+    'éDiretório': definicaoEDiretorio,
+
+    // Sistema de arquivos (lógico: verdadeiro em caso de sucesso).
+    existe: { tipoRetorno: 'lógico', funcao: existe, argumentos: [argumento('caminho', 'texto')] },
+    criarDiretorio: { tipoRetorno: 'lógico', funcao: criarDiretorio, argumentos: [argumento('caminho', 'texto')] },
+    remover: { tipoRetorno: 'lógico', funcao: remover, argumentos: [argumento('caminho', 'texto')] },
+    renomear: {
+        tipoRetorno: 'lógico',
+        funcao: renomear,
+        argumentos: [argumento('origem', 'texto'), argumento('destino', 'texto')]
+    },
+    listarDiretorio: { tipoRetorno: 'texto[]', funcao: listarDiretorio, argumentos: [argumento('caminho', 'texto')] },
+    criarDiretorioTemporario: {
+        tipoRetorno: 'texto',
+        funcao: criarDiretorioTemporario,
+        argumentos: [argumento('diretorioPai', 'texto'), argumento('prefixo', 'texto')]
+    },
+    diretorioPessoal: { tipoRetorno: 'texto', funcao: diretorioPessoal, argumentos: [] },
+    lerTexto: { tipoRetorno: 'texto', funcao: lerTexto, argumentos: [argumento('caminho', 'texto')] },
+    escreverTexto: {
+        tipoRetorno: 'lógico',
+        funcao: escreverTexto,
+        argumentos: [argumento('caminho', 'texto'), argumento('conteudo', 'texto')]
+    },
+    definirPermissoes: {
+        tipoRetorno: 'lógico',
+        funcao: definirPermissoes,
+        argumentos: [argumento('caminho', 'texto'), argumento('modo', 'inteiro')]
+    },
+
+    // Caminhos.
+    juntarCaminhos: {
+        tipoRetorno: 'texto',
+        funcao: juntarCaminhos,
+        argumentos: [argumento('base', 'texto'), argumento('parte', 'texto')]
+    },
+    diretorioPai: { tipoRetorno: 'texto', funcao: diretorioPai, argumentos: [argumento('caminho', 'texto')] },
+    nomeBase: { tipoRetorno: 'texto', funcao: nomeBase, argumentos: [argumento('caminho', 'texto')] },
+    caminhoAbsoluto: { tipoRetorno: 'texto', funcao: caminhoAbsoluto, argumentos: [argumento('caminho', 'texto')] }
 }

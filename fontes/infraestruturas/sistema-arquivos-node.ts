@@ -1,4 +1,5 @@
 import * as caminho from 'path';
+import * as os from 'os';
 import { promises as sistemaArquivos } from 'fs';
 
 import { SistemaArquivosInterface } from '../interfaces/sistema-arquivos-interface';
@@ -46,5 +47,50 @@ export class SistemaArquivosNode implements SistemaArquivosInterface {
         }
 
         return caminhoDiretorioOuArquivo;
+    }
+
+    async criarDiretorio(caminhoDiretorio: string): Promise<void> {
+        await sistemaArquivos.mkdir(caminhoDiretorio, { recursive: true });
+    }
+
+    async remover(caminhoAlvo: string): Promise<void> {
+        // `force`: remover algo que não existe não é erro, como na realização LLVM.
+        await sistemaArquivos.rm(caminhoAlvo, { recursive: true, force: true });
+    }
+
+    async renomear(origem: string, destino: string): Promise<void> {
+        await sistemaArquivos.rename(origem, destino);
+    }
+
+    async listarDiretorio(caminhoDiretorio: string): Promise<string[]> {
+        return sistemaArquivos.readdir(caminhoDiretorio);
+    }
+
+    async criarDiretorioTemporario(diretorioPai: string, prefixo: string): Promise<string> {
+        return sistemaArquivos.mkdtemp(caminho.join(diretorioPai, prefixo));
+    }
+
+    diretorioTemporarioSistema(): string {
+        return os.tmpdir();
+    }
+
+    diretorioPessoal(): string {
+        return os.homedir();
+    }
+
+    async definirPermissoes(caminhoAlvo: string, modo: number): Promise<void> {
+        await sistemaArquivos.chmod(caminhoAlvo, modo);
+    }
+
+    separadorCaminhos(): string {
+        return caminho.sep;
+    }
+
+    eCaminhoAbsoluto(caminhoAlvo: string): boolean {
+        return caminho.isAbsolute(caminhoAlvo);
+    }
+
+    caminhoAbsoluto(caminhoAlvo: string): string {
+        return caminho.resolve(caminhoAlvo);
     }
 }

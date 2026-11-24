@@ -52,6 +52,65 @@ export async function eDiretorio(interpretador: { diretorioBase: string }, camin
     return servicoArquivosPadrao.eDiretorio(interpretador, caminhoArquivoOuDiretorio);
 }
 
+// Operações com a mesma interface do módulo `arquivos` da realização LLVM.
+type Interpretador = { diretorioBase: string };
+
+export async function existe(interpretador: Interpretador, caminho: string): Promise<boolean> {
+    return servicoArquivosPadrao.existe(interpretador, caminho);
+}
+
+export async function criarDiretorio(interpretador: Interpretador, caminho: string): Promise<boolean> {
+    return servicoArquivosPadrao.criarDiretorio(interpretador, caminho);
+}
+
+export async function remover(interpretador: Interpretador, caminho: string): Promise<boolean> {
+    return servicoArquivosPadrao.remover(interpretador, caminho);
+}
+
+export async function renomear(interpretador: Interpretador, origem: string, destino: string): Promise<boolean> {
+    return servicoArquivosPadrao.renomear(interpretador, origem, destino);
+}
+
+export async function listarDiretorio(interpretador: Interpretador, caminho: string): Promise<string[]> {
+    return servicoArquivosPadrao.listarDiretorio(interpretador, caminho);
+}
+
+export async function criarDiretorioTemporario(interpretador: Interpretador, diretorioPai: string, prefixo: string): Promise<string | null> {
+    return servicoArquivosPadrao.criarDiretorioTemporario(interpretador, diretorioPai, prefixo);
+}
+
+export function diretorioPessoal(): string | null {
+    return servicoArquivosPadrao.diretorioPessoal();
+}
+
+export async function lerTexto(interpretador: Interpretador, caminho: string): Promise<string | null> {
+    return servicoArquivosPadrao.lerTexto(interpretador, caminho);
+}
+
+export async function escreverTexto(interpretador: Interpretador, caminho: string, conteudo: string): Promise<boolean> {
+    return servicoArquivosPadrao.escreverTexto(interpretador, caminho, conteudo);
+}
+
+export async function definirPermissoes(interpretador: Interpretador, caminho: string, modo: number): Promise<boolean> {
+    return servicoArquivosPadrao.definirPermissoes(interpretador, caminho, modo);
+}
+
+export function juntarCaminhos(_interpretador: Interpretador, base: string, parte: string): string {
+    return servicoArquivosPadrao.juntarCaminhos(base, parte);
+}
+
+export function diretorioPai(_interpretador: Interpretador, caminho: string): string {
+    return servicoArquivosPadrao.diretorioPai(caminho);
+}
+
+export function nomeBase(_interpretador: Interpretador, caminho: string): string {
+    return servicoArquivosPadrao.nomeBase(caminho);
+}
+
+export function caminhoAbsoluto(interpretador: Interpretador, caminho: string): string | null {
+    return servicoArquivosPadrao.caminhoAbsoluto(interpretador, caminho);
+}
+
 export * from './arquivo';
 export * from './interfaces';
 export * from './infraestruturas';
