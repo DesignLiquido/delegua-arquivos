@@ -1,6 +1,6 @@
 {
   "name": "@designliquido/delegua-arquivos",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Biblioteca para acessos a arquivos e diretórios em Delégua",
   "main": "index.js",
   "types": "index.d.ts",
